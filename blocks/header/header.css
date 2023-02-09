@@ -5,14 +5,9 @@
   margin: 45px auto 36px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 700px) {
   .header {
     min-height: 56px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .header {
     margin: 26px auto 38px;
   }
 }
