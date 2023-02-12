@@ -18,10 +18,10 @@
       <img class="profile__avatar" src="./images/avatar.png" alt="Фото Жака-Ива Кусто.">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button hover-link" type="button"></button>
+        <button class="profile__edit-button hover-link" type="button" aria-label="Редактировать"></button>
         <p class="profile__occupation">Исследователь океана</p>
       </div>
-      <button class="profile__add-button hover-link" type="button"></button>
+      <button class="profile__add-button hover-link" type="button" aria-label="Добавить"></button>
     </section>
 
     <section class="elements">
@@ -30,7 +30,7 @@
           <img class="element__image" src="./images/karachayevsk.jpg" alt="Карачаевск.">
           <div class="element__content">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button hover-link" type="button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </li>
 
@@ -38,7 +38,7 @@
           <img class="element__image" src="./images/kamchatka.jpg" alt="Камчатка.">
           <div class="element__content">
             <h2 class="element__title">Камчатка</h2>
-            <button class="element__like-button hover-link" type="button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </li>
 
@@ -46,7 +46,7 @@
           <img class="element__image" src="./images/kazan.jpg" alt="Казань.">
           <div class="element__content">
             <h2 class="element__title">Казань</h2>
-            <button class="element__like-button hover-link" type="button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </li>
 
@@ -54,7 +54,7 @@
           <img class="element__image" src="./images/baikal.jpg" alt="Байкал.">
           <div class="element__content">
             <h2 class="element__title">Байкал</h2>
-            <button class="element__like-button hover-link" type="button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </li>
 
@@ -62,7 +62,7 @@
           <img class="element__image" src="./images/balaclava.jpg" alt="Балаклава.">
           <div class="element__content">
             <h2 class="element__title">Балаклава</h2>
-            <button class="element__like-button hover-link" type="button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </li>
 
@@ -70,29 +70,31 @@
           <img class="element__image" src="./images/rostov.jpg" alt="Ростов Великий.">
           <div class="element__content">
             <h2 class="element__title">Ростов Великий</h2>
-            <button class="element__like-button hover-link" type="button"></button>
+            <button class="element__like-button" type="button"></button>
           </div>
         </li>
       </ul>
     </section>
   </main>
 
-  <section class="popup">
-    <div class="popup__container">
-      <button class="popup__close-button hover-link" type="button"></button>
-      <form class="popup__form">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__field popup__field_info_name" type="text" name="name" value="Жак-Ив Кусто">
-        <input class="popup__field popup__field_info_occupation" type="text" name="occupation"
-          value="Исследователь океана">
-        <button class="popup__submit hover-link" type="submit">Сохранить</button>
-      </form>
-    </div>
-  </section>
-
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
+
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
+      <form class="popup__form" name="form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__field popup__field_info_name" type="text" name="name" value="Жак-Ив Кусто"
+          placeholder="Имя" required>
+        <input class="popup__field popup__field_info_occupation" type="text" name="occupation"
+          value="Исследователь океана" placeholder="Профессия" required>
+        <button class="popup__submit hover-link" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <script src="./scripts/index.js"></script>
 </body>
 
