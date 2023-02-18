@@ -92,7 +92,34 @@
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup-edit">
+    <div class="popup__container">
+      <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
+      <form class="popup__form" name="form-edit">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__field popup__field_info_name" type="text" name="name" value="" placeholder="Имя" required>
+        <input class="popup__field popup__field_info_occupation" type="text" name="occupation" value=""
+          placeholder="Профессия" required>
+        <button class="popup__submit hover-link" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup-add">
+    <div class="popup__container">
+      <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
+      <form class="popup__form" name="form-add">
+        <h2 class="popup__title">Новое место</h2>
+        <input class="popup__field popup__field_element_name" type="text" name="element-name" value=""
+          placeholder="Название" required>
+        <input class="popup__field popup__field_element_src" type="text" name="element-src" value=""
+          placeholder="Ссылка на картинку" required>
+        <button class="popup__submit hover-link" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup-">
     <div class="popup__container">
       <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
       <form class="popup__form" name="form-edit">
@@ -105,8 +132,6 @@
       </form>
     </div>
   </div>
-
-
 
   <script src="./scripts/index.js"></script>
 </body>
