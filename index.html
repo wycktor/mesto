@@ -25,8 +25,8 @@
     </section>
 
     <section class="elements" aria-label="Галерея">
-      <!--  <ul class="elements__list">
-         <li class="element">
+      <ul class="elements__list">
+        <!--   <li class="element">
           <img class="element__image" src="./images/karachayevsk.jpg" alt="Карачаевск.">
           <div class="element__content">
             <h2 class="element__title">Карачаевск</h2>
@@ -72,11 +72,11 @@
             <h2 class="element__title">Ростов Великий</h2>
             <button class="element__like-button" type="button"></button>
           </div>
-        </li> 
-      </ul> -->
+        </li> -->
+      </ul>
     </section>
 
-    <template id="card">
+    <template class="card">
       <li class="element">
         <button class="element__recycle-button" type="button"></button>
         <img class="element__image" src="#" alt="#">
@@ -94,8 +94,8 @@
 
   <div class="popup popup-edit">
     <div class="popup__container">
-      <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
-      <form class="popup__form" name="form-edit">
+      <button class="popup__close-button popup__close-edit hover-link" type="button" aria-label="Закрыть"></button>
+      <form class="popup__form popup__form-edit" name="form-edit">
         <h2 class="popup__title">Редактировать профиль</h2>
         <input class="popup__field popup__field_info_name" type="text" name="name" value="" placeholder="Имя" required>
         <input class="popup__field popup__field_info_occupation" type="text" name="occupation" value=""
@@ -107,8 +107,8 @@
 
   <div class="popup popup-add">
     <div class="popup__container">
-      <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
-      <form class="popup__form" name="form-add">
+      <button class="popup__close-button popup__close-add hover-link" type="button" aria-label="Закрыть"></button>
+      <form class="popup__form popup__form-add" name="form-add">
         <h2 class="popup__title">Новое место</h2>
         <input class="popup__field popup__field_element_name" type="text" name="element-name" value=""
           placeholder="Название" required>
@@ -121,7 +121,7 @@
 
   <div class="popup popup-image">
     <div class="popup__container-image">
-      <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
+      <button class="popup__close-button popup__close-image hover-link" type="button" aria-label="Закрыть"></button>
       <img class="popup__image" src="#" alt="#">
       <p class="popup__subtitle"></p>
     </div>
