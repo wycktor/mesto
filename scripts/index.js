@@ -8,7 +8,7 @@ const popupImage = document.querySelector('.popup-image');
 const fieldInfoName = document.querySelector('.popup__field_info_name');
 const fieldInfoOccupation = document.querySelector('.popup__field_info_occupation');
 const fieldElementName = document.querySelector('.popup__field_element_name');
-const fieldElementLink = document.querySelector('.popup__field_element_src');
+const fieldElementLink = document.querySelector('.popup__field_element_link');
 const formEdit = document.querySelector('.popup__form-edit');
 const formAdd = document.querySelector('.popup__form-add');
 const closeButtonEdit = document.querySelector('.popup__close-edit');
@@ -106,7 +106,8 @@ const handleImageClick = function (name, link) {
 
 const saveElement = function () {
   elementsList.prepend(createCard(fieldElementName.value, fieldElementLink.value));
-  toggleInitialPopup(popupAdd);
+  fieldElementName.value = '';
+  fieldElementLink.value = '';
 };
 
 // Добавление картинки
