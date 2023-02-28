@@ -25,55 +25,7 @@
     </section>
 
     <section class="elements" aria-label="Галерея">
-      <ul class="elements__list">
-        <!--   <li class="element">
-          <img class="element__image" src="./images/karachayevsk.jpg" alt="Карачаевск.">
-          <div class="element__content">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/kamchatka.jpg" alt="Камчатка.">
-          <div class="element__content">
-            <h2 class="element__title">Камчатка</h2>
-            <button class="element__like-button" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/kazan.jpg" alt="Казань.">
-          <div class="element__content">
-            <h2 class="element__title">Казань</h2>
-            <button class="element__like-button" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/baikal.jpg" alt="Байкал.">
-          <div class="element__content">
-            <h2 class="element__title">Байкал</h2>
-            <button class="element__like-button" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/balaclava.jpg" alt="Балаклава.">
-          <div class="element__content">
-            <h2 class="element__title">Балаклава</h2>
-            <button class="element__like-button" type="button"></button>
-          </div>
-        </li>
-
-        <li class="element">
-          <img class="element__image" src="./images/rostov.jpg" alt="Ростов Великий.">
-          <div class="element__content">
-            <h2 class="element__title">Ростов Великий</h2>
-            <button class="element__like-button" type="button"></button>
-          </div>
-        </li> -->
-      </ul>
+      <ul class="elements__list"></ul>
     </section>
 
     <template class="card">
@@ -95,11 +47,14 @@
   <div class="popup popup-edit">
     <div class="popup__container">
       <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
-      <form class="popup__form popup__form-edit" name="form-edit">
+      <form class="popup__form popup__form-edit" name="form-edit" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__field popup__field_info_name" type="text" name="name" value="" placeholder="Имя" required>
+        <input class="popup__field popup__field_info_name" type="text" name="name" value="" placeholder="Имя"
+          minlength="2" maxlength="40" required>
+        <span class="popup__field_type_error name-error"></span>
         <input class="popup__field popup__field_info_occupation" type="text" name="occupation" value=""
-          placeholder="Профессия" required>
+          placeholder="Профессия" minlength="2" maxlength="200" required>
+        <span class="popup__field_type_error occupation-error"></span>
         <button class="popup__submit hover-link" type="submit">Сохранить</button>
       </form>
     </div>
@@ -108,13 +63,15 @@
   <div class="popup popup-add">
     <div class="popup__container">
       <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
-      <form class="popup__form popup__form-add" name="form-add">
+      <form class="popup__form popup__form-add" name="form-add" novalidate>
         <h2 class="popup__title">Новое место</h2>
         <input class="popup__field popup__field_element_name" type="text" name="element-name" value=""
-          placeholder="Название" required>
+          placeholder="Название" minlength="2" maxlength="30" required>
+        <span class="popup__field_type_error element-name-error"></span>
         <input class="popup__field popup__field_element_link" type="url" name="element-src" value=""
           placeholder="Ссылка на картинку" required>
-        <button class="popup__submit hover-link" type="submit">Сохранить</button>
+        <span class="popup__field_type_error element-src-error"></span>
+        <button class="popup__submit popup__submit_disabled hover-link" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -128,6 +85,7 @@
   </div>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

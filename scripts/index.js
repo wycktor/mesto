@@ -11,6 +11,7 @@ const fieldElementName = document.querySelector('.popup__field_element_name');
 const fieldElementLink = document.querySelector('.popup__field_element_link');
 const formEdit = document.forms['form-edit'];
 const formAdd = document.forms['form-add'];
+const popupList = document.querySelectorAll('.popup');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 const elementsList = document.querySelector('.elements__list');
 const image = document.querySelector('.popup__image');
@@ -43,22 +44,26 @@ const initialCards = [
   }
 ];
 
-// Переключение видимости всплывающего окна
-// const toggleInitialPopup = function (popup) {
-//   popup.classList.toggle('popup_opened');
-// };
+// Закрытие окна при нажатии клавиши 'Esc'
+const closePopupEsc = function (evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+};
 
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
 };
 
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 };
 
 // Заполнение полей формы данными из профиля
 const handleEditButtonClick = function () {
-  // toggleInitialPopup(popupEdit);
   openPopup(popupEdit);
   fieldInfoName.value = profileName.textContent;
   fieldInfoOccupation.value = profileOccupation.textContent;
@@ -127,6 +132,7 @@ function deleteCard(evt) {
   card.remove();
 }
 
+// Закрытие окна по кнопке 'Закрыть'
 closeButtons.forEach(button => {
   // находим 1 раз ближайший к крестику попап
   const popup = button.closest('.popup');
@@ -134,14 +140,18 @@ closeButtons.forEach(button => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
+// Закрытие окна кликом на оверлей
+popupList.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    if (evt.target === popup) {
+      popup.classList.remove('popup_opened');
+      // Удаление слушателя кнопки 'Esc'
+      document.removeEventListener('keydown', closePopupEsc);
+    }
+  });
+});
+
 editButton.addEventListener('click', handleEditButtonClick);
 addButton.addEventListener('click', () => openPopup(popupAdd));
 formEdit.addEventListener('submit', handleProfileFormSubmiit);
 formAdd.addEventListener('submit', handleFormAdd);
-
-/* Тест добавления картинки
-{
-  name: 'Карачаевск',
-  link: 'https://images.unsplash.com/photo-1588584922681-745a2223f72c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80'
-}
-*/
