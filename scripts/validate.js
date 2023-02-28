@@ -3,7 +3,7 @@ const validationSettings = {
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_disabled',
-  inputErrorClass: 'popup__field_type_error',
+  inputErrorClass: 'popup__field-error',
   errorClass: 'popup__error_visible'
 };
 
