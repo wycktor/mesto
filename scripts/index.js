@@ -17,33 +17,6 @@ const elementsList = document.querySelector('.elements__list');
 const image = document.querySelector('.popup__image');
 const subtitle = document.querySelector('.popup__subtitle');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // Закрытие окна при нажатии клавиши 'Esc'
 const closePopupEsc = function (evt) {
   if (evt.key === 'Escape') {
@@ -143,8 +116,8 @@ closeButtons.forEach(button => {
 // Закрытие окна кликом на оверлей
 popupList.forEach(popup => {
   popup.addEventListener('click', evt => {
-    if (evt.target === popup) {
-      popup.classList.remove('popup_opened');
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
       // Удаление слушателя кнопки 'Esc'
       document.removeEventListener('keydown', closePopupEsc);
     }
