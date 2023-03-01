@@ -34,6 +34,7 @@ const openPopup = function (popup) {
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);
+  resetErrorFied(popup);
 };
 
 // Заполнение полей формы данными из профиля
@@ -131,6 +132,15 @@ popupList.forEach(popup => {
     }
   });
 });
+
+function resetErrorFied(popup) {
+  const errorFiedList = popup.querySelectorAll('.popup__field-error');
+
+  errorFiedList.forEach(errorFied => {
+    errorFied.textContent = '';
+    errorFied.classList.remove('popup__error_visible');
+  });
+}
 
 editButton.addEventListener('click', handleEditButtonClick);
 addButton.addEventListener('click', () => openPopup(popupAdd));
