@@ -11,6 +11,7 @@ const fieldElementName = document.querySelector('.popup__field_element_name');
 const fieldElementLink = document.querySelector('.popup__field_element_link');
 const formEdit = document.forms['form-edit'];
 const formAdd = document.forms['form-add'];
+const addNewCardButton = formAdd.querySelector('.popup__submit_disabled');
 const popupList = document.querySelectorAll('.popup');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 const elementsList = document.querySelector('.elements__list');
@@ -91,12 +92,19 @@ const saveElement = function () {
   elementsList.prepend(createCard(fieldElementName.value, fieldElementLink.value));
 };
 
+// Очистка формы после добавления новой карточки
+const disableFormAdd = function () {
+  addNewCardButton.classList.add('popup__submit_disabled');
+  addNewCardButton.setAttribute('disabled', '');
+};
+
 // Добавление картинки
 const handleFormAdd = function (evt) {
   evt.preventDefault();
   saveElement(evt);
   evt.target.reset();
   closePopup(popupAdd);
+  disableFormAdd();
 };
 
 // Удаление картинки
