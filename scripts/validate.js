@@ -7,13 +7,13 @@ const validationSettings = {
   errorClass: 'popup__error_visible'
 };
 
-// Скрытие сообщения ошибки
+// Отображение сообщения ошибки
 const showInputError = (errorElement, errorClass, input) => {
   errorElement.classList.add(errorClass);
   errorElement.textContent = input.validationMessage;
 };
 
-// Отображение сообщения ошибки
+// Скрытие сообщения ошибки
 const hideInputError = (errorElement, errorClass) => {
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
@@ -33,7 +33,7 @@ const checkValidityInput = (form, settings, input) => {
 
 // Валидность поля ввода
 const setEventListeners = (form, settings) => {
-  const inputList = Array.from(document.querySelectorAll(settings.inputSelector));
+  const inputList = Array.from(form.querySelectorAll(settings.inputSelector));
 
   inputList.forEach(item => {
     item.addEventListener('input', () => checkValidityInput(form, settings, item));
@@ -49,7 +49,7 @@ const toggleButtonState = (form, settings) => {
 };
 
 // Валидация формы
-const enableValidation = function (settings) {
+const enableValidation = settings => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
   // Валидация полей
@@ -59,6 +59,18 @@ const enableValidation = function (settings) {
     });
 
     setEventListeners(form, settings);
+  });
+};
+
+// Сброс ошибок формы
+const resetErrorFied = (form, inputList, errorClass) => {
+  const fieldList = Array.from(form.querySelectorAll(inputList));
+
+  fieldList.forEach(input => {
+    const inputName = input.name;
+    const spanError = form.querySelector(`.${inputName}-error`);
+
+    hideInputError(spanError, errorClass);
   });
 };
 
