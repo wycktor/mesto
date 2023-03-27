@@ -1,3 +1,9 @@
+import Card from './Card.js';
+import FormValidator, { configValidation } from './FormValidator.js';
+import { initialCards } from './initialCards.js';
+
+export { openPopupImage };
+
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
 const editButton = document.querySelector('.profile__edit-button');
@@ -11,12 +17,18 @@ const fieldElementName = document.querySelector('.popup__field_element_name');
 const fieldElementLink = document.querySelector('.popup__field_element_link');
 const formEdit = document.forms['form-edit'];
 const formAdd = document.forms['form-add'];
-const buttonSubmitFormAdd = formAdd.querySelector('.popup__submit_disabled');
 const popupList = document.querySelectorAll('.popup');
-const closeButtons = document.querySelectorAll('.popup__close-button');
 const elementsList = document.querySelector('.elements__list');
 const image = document.querySelector('.popup__image');
 const subtitle = document.querySelector('.popup__subtitle');
+
+// Экземпляры валидации форм
+const formProfileEditValidator = new FormValidator(configValidation, formEdit);
+const formCardAddValidator = new FormValidator(configValidation, formAdd);
+
+// Устанавливаем валидацию форм
+formProfileEditValidator.enableValidation();
+formCardAddValidator.enableValidation();
 
 // Закрытие окна при нажатии клавиши 'Esc'
 const closePopupEsc = evt => {
@@ -41,6 +53,7 @@ const closePopup = popup => {
 // Открытие формы редактирования профиля
 const handleEditButtonClick = () => {
   openPopup(popupEdit);
+  formProfileEditValidator.resetErrorInput();
   fieldInfoName.value = profileName.textContent;
   fieldInfoOccupation.value = profileOccupation.textContent;
 };
@@ -48,14 +61,14 @@ const handleEditButtonClick = () => {
 // Открытие формы добавления карточки
 const handleAddButtonClick = () => {
   openPopup(popupAdd);
-  resetErrorFied(formAdd, validationSettings.inputSelector, validationSettings.errorClass);
+  formCardAddValidator.resetErrorInput();
 };
 
 // Открытие выбранной карточки
-const handleImageClick = (name, link) => {
-  image.alt = name;
-  image.src = link;
-  subtitle.textContent = name;
+const openPopupImage = data => {
+  image.alt = data.name;
+  image.src = data.link;
+  subtitle.textContent = data.name;
 
   openPopup(popupImage);
 };
@@ -70,74 +83,50 @@ const handleProfileFormSubmiit = evt => {
 
 //  Вывод карточек из массива
 initialCards.forEach(element => {
-  elementsList.append(createCard(element.name, element.link));
+  const card = createCard(element);
+
+  elementsList.append(card);
 });
 
-// Сохранение карточки
-const saveElement = () => {
-  elementsList.prepend(createCard(fieldElementName.value, fieldElementLink.value));
-};
-
-// Очистка формы после добавления новой карточки
-const disableFormAdd = () => {
-  buttonSubmitFormAdd.classList.add('popup__submit_disabled');
-  buttonSubmitFormAdd.setAttribute('disabled', '');
-};
-
-// Добавление карточки
+// Добавление новой карточки
 const handleFormAdd = evt => {
   evt.preventDefault();
-  saveElement(evt);
-  evt.target.reset();
+  handleAddCard();
+  formCardAddValidator.disableSubmitButton();
+  formAdd.reset();
   closePopup(popupAdd);
-  disableFormAdd();
 };
 
-// Закрытие окна по кнопке 'Закрыть'
-closeButtons.forEach(button => {
-  // находим 1 раз ближайший к крестику попап
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
-
-// Закрытие окна кликом на оверлей
+// Закрытие окна кликом на оверлей и по кнопке 'Закрыть'
 popupList.forEach(popup => {
   popup.addEventListener('click', evt => {
-    if (evt.target.classList.contains('popup_opened')) {
+    if (
+      evt.target.classList.contains('popup_opened') ||
+      evt.target.classList.contains('popup__close-button')
+    ) {
       closePopup(popup);
     }
   });
 });
 
 // Создание карточки
-function createCard(name, link) {
-  const card = document.querySelector('.card').content.querySelector('.element');
-  const element = card.cloneNode(true);
-  const elementImage = element.querySelector('.element__image');
-  const likeButton = element.querySelector('.element__like-button');
-  const recycleButton = element.querySelector('.element__recycle-button');
-
-  element.querySelector('.element__title').textContent = name;
-  elementImage.alt = name;
-  elementImage.src = link;
-
-  // Слушатель открытия карточки
-  elementImage.addEventListener('click', () => handleImageClick(name, link));
-  // Слушатель лайка карточки
-  likeButton.addEventListener('click', evt =>
-    evt.target.classList.toggle('element__like-button_checked')
-  );
-  // Слушатель удаления карточки
-  recycleButton.addEventListener('click', deleteCard);
+function createCard(data) {
+  const card = new Card(data, '.card');
+  const element = card.createCard();
 
   return element;
 }
 
-// Удаление карточки
-function deleteCard(evt) {
-  const card = evt.target.closest('.element');
-  card.remove();
+// Добавление карточки в контейнер
+function handleAddCard() {
+  const data = {};
+
+  data.name = fieldElementName.value;
+  data.link = fieldElementLink.value;
+
+  const card = createCard(data);
+
+  elementsList.prepend(card);
 }
 
 editButton.addEventListener('click', handleEditButtonClick);
