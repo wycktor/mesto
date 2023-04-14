@@ -49,12 +49,12 @@
       <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
       <form class="popup__form popup__form-edit" name="form-edit" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__field popup__field_info_name" type="text" name="name" value="" placeholder="Имя"
+        <input class="popup__field popup__field_info_name" type="text" name="profile-name" value="" placeholder="Имя"
           minlength="2" maxlength="40" required>
-        <span class="popup__field-error name-error"></span>
-        <input class="popup__field popup__field_info_occupation" type="text" name="occupation" value=""
+        <span class="popup__field-error profile-name-error"></span>
+        <input class="popup__field popup__field_info_occupation" type="text" name="profile-occupation" value=""
           placeholder="Профессия" minlength="2" maxlength="200" required>
-        <span class="popup__field-error occupation-error"></span>
+        <span class="popup__field-error profile-occupation-error"></span>
         <button class="popup__submit hover-link" type="submit">Сохранить</button>
       </form>
     </div>
@@ -65,12 +65,12 @@
       <button class="popup__close-button hover-link" type="button" aria-label="Закрыть"></button>
       <form class="popup__form popup__form-add" name="form-add" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input class="popup__field popup__field_element_name" type="text" name="element-name" value=""
-          placeholder="Название" minlength="2" maxlength="30" required>
-        <span class="popup__field-error element-name-error"></span>
-        <input class="popup__field popup__field_element_link" type="url" name="element-src" value=""
+        <input class="popup__field popup__field_element_name" type="text" name="name" value="" placeholder="Название"
+          minlength="2" maxlength="30" required>
+        <span class="popup__field-error name-error"></span>
+        <input class="popup__field popup__field_element_link" type="url" name="link" value=""
           placeholder="Ссылка на картинку" required>
-        <span class="popup__field-error element-src-error"></span>
+        <span class="popup__field-error link-error"></span>
         <button class="popup__submit popup__submit_disabled hover-link" type="submit">Сохранить</button>
       </form>
     </div>
@@ -84,7 +84,7 @@
     </div>
   </div>
 
-  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>

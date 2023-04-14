@@ -1,18 +1,12 @@
-// Конфигуратор валидации форм
-export const configValidation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_disabled',
-  inputErrorClass: 'popup__field-error',
-  errorClass: 'popup__error_visible'
-};
-
 export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
     this._buttonElement = this._form.querySelector(this._config.submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+    this._errorInputList = Array.from(
+      this._form.querySelectorAll(`.${this._config.inputErrorClass}`)
+    );
   }
 
   // Отображение сообщения ошибки
@@ -49,9 +43,7 @@ export default class FormValidator {
 
   // Валидность поля ввода
   _setEventListeners() {
-    const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-
-    inputList.forEach(input => {
+    this._inputList.forEach(input => {
       input.addEventListener('input', () => {
         this._checkValidityInput(input);
         this._toggleButtonState();
@@ -65,11 +57,9 @@ export default class FormValidator {
     this._buttonElement.setAttribute('disabled', '');
   }
 
-  // Сброс ошибок формы
-  resetErrorInput() {
-    const errorInputList = this._form.querySelectorAll(`.${this._config.inputErrorClass}`);
-
-    errorInputList.forEach(errorInput => {
+  // Очистка ошибок
+  resetValidation() {
+    this._errorInputList.forEach(errorInput => {
       this._hideInputError(errorInput);
     });
   }

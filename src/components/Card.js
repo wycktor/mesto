@@ -1,10 +1,9 @@
-import { openPopupImage } from './index.js';
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, { handleCardClick }) {
     this._link = data.link;
     this._name = data.name;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // Шаблон карточки
@@ -17,19 +16,9 @@ export default class Card {
     return cardElement;
   }
 
-  // Открытие карточки
-  _handleImageClick(evt) {
-    const data = {
-      name: evt.target.alt,
-      link: evt.target.src
-    };
-
-    openPopupImage(data);
-  }
-
   // Лайк карточки
-  _handleLikeCard(evt) {
-    evt.target.classList.toggle('element__like-button_checked');
+  _handleLikeCard() {
+    this._likeButton.classList.toggle('element__like-button_checked');
   }
 
   // Удаление карточки
@@ -39,21 +28,21 @@ export default class Card {
 
   // Настройка слушателей
   _setEventListeners() {
-    this._elementImage.addEventListener('click', this._handleImageClick);
+    this._elementImage.addEventListener('click', () =>
+      this._handleCardClick(this._name, this._link)
+    );
 
-    this._element
-      .querySelector('.element__like-button')
-      .addEventListener('click', this._handleLikeCard);
+    this._likeButton.addEventListener('click', () => this._handleLikeCard());
 
-    this._element
-      .querySelector('.element__recycle-button')
-      .addEventListener('click', () => this._handleDeleteCard());
+    this._deleteButton.addEventListener('click', () => this._handleDeleteCard());
   }
 
   // Создание карточки
   createCard() {
     this._element = this._getTemplate();
     this._elementImage = this._element.querySelector('.element__image');
+    this._likeButton = this._element.querySelector('.element__like-button');
+    this._deleteButton = this._element.querySelector('.element__recycle-button');
 
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
