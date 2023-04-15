@@ -15,6 +15,8 @@ import {
   formAdd
 } from '../utils/constants.js';
 
+import './index.css';
+
 // Класс отображения данных пользователя
 const userInfo = new UserInfo({ name: '.profile__name', occupation: '.profile__occupation' });
 
