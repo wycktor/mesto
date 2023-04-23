@@ -24,6 +24,7 @@ export default class Card {
   // Удаление карточки
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   // Настройка слушателей
