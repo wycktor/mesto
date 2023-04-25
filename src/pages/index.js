@@ -9,9 +9,11 @@ import {
   configValidation,
   editButton,
   addButton,
+  editButtonAvatar,
   fieldInfoName,
   fieldInfoOccupation,
   formEdit,
+  formAvatar,
   formAdd
 } from '../utils/constants.js';
 
@@ -43,6 +45,16 @@ const popupEdit = new PopupWithForm('.popup-edit', {
   }
 });
 
+// Экземпляр попап редактирования аватара
+const popupAvatar = new PopupWithForm('.popup-avatar', {
+  handleFormSubmit: data => {
+    userInfo.setUserInfo({
+      name: data['profile-name'],
+      occupation: data['profile-occupation']
+    });
+  }
+});
+
 // Экземпляр попап добавления карточки
 const popupAdd = new PopupWithForm('.popup-add', {
   handleFormSubmit: data => {
@@ -56,14 +68,17 @@ const popupWithImage = new PopupWithImage('.popup-image');
 
 // Экземпляры валидации форм
 const formProfileEditValidator = new FormValidator(configValidation, formEdit);
+const formAvatarValidator = new FormValidator(configValidation, formAvatar);
 const formCardAddValidator = new FormValidator(configValidation, formAdd);
 
 // Устанавливаем валидацию форм
 formProfileEditValidator.enableValidation();
+formAvatarValidator.enableValidation();
 formCardAddValidator.enableValidation();
 
 // Устанавливаем слушатели попапов
 popupEdit.setEventListeners();
+popupAvatar.setEventListeners();
 popupAdd.setEventListeners();
 popupWithImage.setEventListeners();
 
@@ -79,8 +94,16 @@ const handleEditButtonClick = () => {
   formProfileEditValidator.disableSubmitButton();
 };
 
+// Открытие формы редактирования аватара
+const handleButtonAvatarClick = () => {
+  popupAvatar.open();
+  formAvatarValidator.resetValidation();
+  formAvatarValidator.disableSubmitButton();
+};
+
 // Открытие формы добавления карточки
 const handleAddButtonClick = () => {
+  // debugger;
   popupAdd.open();
   formCardAddValidator.resetValidation();
   formCardAddValidator.disableSubmitButton();
@@ -102,3 +125,4 @@ initialCardList.renderItems();
 
 editButton.addEventListener('click', handleEditButtonClick);
 addButton.addEventListener('click', handleAddButtonClick);
+editButtonAvatar.addEventListener('click', handleButtonAvatarClick);
