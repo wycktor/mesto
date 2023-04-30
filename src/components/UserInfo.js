@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({ name, occupation }) {
+  constructor({ name, about, avatar }) {
     this._userName = document.querySelector(name);
-    this._userOccupation = document.querySelector(occupation);
+    this._userOccupation = document.querySelector(about);
+    this._avatar = document.querySelector(avatar);
   }
 
   // Вернуть данные пользователя
@@ -15,6 +16,16 @@ export default class UserInfo {
   // Установить данные пользователя
   setUserInfo(data) {
     this._userName.textContent = data.name;
-    this._userOccupation.textContent = data.occupation;
+    this._userOccupation.textContent = data.about;
+    this._id = data._id;
+  }
+
+  // Обновить аватар пользователя
+  setUserAvatar(avatar) {
+    this._avatar.src = avatar;
+  }
+
+  getUserId() {
+    return this._id;
   }
 }
