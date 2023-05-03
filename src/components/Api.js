@@ -13,77 +13,77 @@ export default class Api {
     return res.json();
   }
 
+  // Универсальный метод запроса с проверкой ответа
+  _request(url, options) {
+    return fetch(`${this._baseUrl}/${url}`, options).then(res => this._getResponse(res));
+  }
+
   // Загрузка информации о пользователе с сервера
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
-    }).then(res => this._getResponse(res));
+    return this._request('users/me', { headers: this._headers });
   }
 
   // Редактирование профиля
   setUserInfo(data) {
-    console.log(data);
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request('users/me', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
       })
-    }).then(res => this._getResponse(res));
+    });
   }
 
   // Загрузка карточек с сервера
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
-    }).then(res => this._getResponse(res));
+    return this._request('cards', { headers: this._headers });
   }
 
   // Добавление новой карточки
   createCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request('cards', {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link
       })
-    }).then(res => this._getResponse(res));
+    });
   }
 
   // Удаление карточки
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return this._request(`cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
-    }).then(res => this._getResponse(res));
+    });
   }
 
   // Постановка лайка карточки
   setLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
-    }).then(res => this._getResponse(res));
+    });
   }
 
   // Снятие лайка карточки
   deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
-    }).then(res => this._getResponse(res));
+    });
   }
 
   // Обновление аватара пользователя
   updateAvatar(avatar) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request('users/me/avatar', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar
+        avatar
       })
-    }).then(res => this._getResponse(res));
+    });
   }
 }

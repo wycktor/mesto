@@ -8,16 +8,17 @@ export default class UserInfo {
   // Вернуть данные пользователя
   getUserInfo() {
     return {
-      userName: this._userName.textContent,
-      userOccupation: this._userOccupation.textContent
+      name: this._userName.textContent,
+      occupation: this._userOccupation.textContent
     };
   }
 
   // Установить данные пользователя
-  setUserInfo(data) {
-    this._userName.textContent = data.name;
-    this._userOccupation.textContent = data.about;
-    this._id = data._id;
+  setUserInfo({ name, about, avatar, _id }) {
+    this._userName.textContent = name;
+    this._userOccupation.textContent = about;
+    this._avatar.src = avatar;
+    this._id = _id;
   }
 
   // Обновить аватар пользователя
